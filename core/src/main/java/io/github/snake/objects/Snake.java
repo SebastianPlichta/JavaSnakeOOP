@@ -26,4 +26,8 @@ public class Snake extends Object{
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, x*size+offset.x,y*size+offset.y, size, size);
     }
+
+    public void setVelocity(Vector2 velocity) {
+        this.velocity = velocity;
+    }
 }

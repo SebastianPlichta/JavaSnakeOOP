@@ -2,6 +2,7 @@ package io.github.snake;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.snake.managers.GameManager;
@@ -65,12 +67,23 @@ public class Main extends ApplicationAdapter {
     }
 
     private void inputHandler(){
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A)){
+            snake.setVelocity(new Vector2(-1,0));
+        }
+        else if (Gdx.input.isKeyJustPressed(Input.Keys.D)){
+            snake.setVelocity(new Vector2(1,0));
+        }
+        else if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
+            snake.setVelocity(new Vector2(0,1));
+        }
+        else if (Gdx.input.isKeyJustPressed(Input.Keys.S)){
+            snake.setVelocity(new Vector2(0,-1));
+        }
     }
 
     private void update(float deltaTime){
         time += deltaTime;
-        if(time > 1){
+        if(time > 0.3){
             stage.act(deltaTime);
             time = 0;
             turns +=1;
