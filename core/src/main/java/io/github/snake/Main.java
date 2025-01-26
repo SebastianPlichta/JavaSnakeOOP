@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.snake.managers.GameManager;
 import io.github.snake.managers.GridManager;
 import io.github.snake.managers.TextureManager;
+import io.github.snake.objects.Point;
 import io.github.snake.objects.Snake;
 
 import java.util.Vector;
@@ -31,7 +32,6 @@ public class Main extends ApplicationAdapter {
 
     private Snake snake;
 
-    private int turns;
     private float time;
     private static final int SCALE = 4;
 
@@ -48,9 +48,11 @@ public class Main extends ApplicationAdapter {
 
         gameManager = new GameManager(stage,SCALE,width,height);
 
-        snake = new Snake(2,2,SCALE,gameManager.textureManager.getSnake(),gameManager.gridManager.getOffset());
+        snake = new Snake(4,4,SCALE,gameManager.textureManager.getSnake(),gameManager.gridManager.getOffset(), stage);
 
         stage.addActor(snake);
+
+        gameManager.addPoint(5,5,SCALE);
 
         camera.update();
         Gdx.input.setInputProcessor(stage);
@@ -83,11 +85,10 @@ public class Main extends ApplicationAdapter {
 
     private void update(float deltaTime){
         time += deltaTime;
-        if(time > 0.3){
+        snake.checkCollision(gameManager.getPointList());
+        if(time > 0.2){
             stage.act(deltaTime);
             time = 0;
-            turns +=1;
-            System.out.println(turns);
         }
     }
 
